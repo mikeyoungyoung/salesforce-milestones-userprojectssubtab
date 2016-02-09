@@ -1,0 +1,70 @@
+<apex:page sidebar="false" showheader="false" standardStylesheets="false" docType="html-5.0" 
+controller="myProjectListCtrl" >
+
+<html lang="en">
+  <head>
+      <meta charset="utf-8"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <meta name="description" content=""/>
+      <meta name="author" content=""/>
+
+
+    <title>My Project List</title>
+
+    <!-- Bootstrap core CSS -->
+      
+      <apex:stylesheet value="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+
+  </head>
+
+  <body>
+      <ul class="nav nav-pills">
+         <li role="presentation" ><a class="btn " href="https://na34.salesforce.com/_ui/core/userprofile/UserProfilePage?u=00561000000hv5u&tab=My_Projects"  role="button">Ivan's Projects</a></li>
+         <li role="presentation"><a class="btn " href="https://na34.salesforce.com/_ui/core/userprofile/UserProfilePage?u=00561000000nz6tAAA&tab=My_Projects"  role="button">Karine's Projects</a></li>
+         <li role="presentation"><a class="btn " href="https://na34.salesforce.com/_ui/core/userprofile/UserProfilePage?u=00561000000nz70AAA&tab=My_Projects"  role="button">Gordon's Projects</a></li>
+         <li role="presentation"><a class="btn " href="https://na34.salesforce.com/_ui/core/userprofile/UserProfilePage?u=00561000000nz6oAAA&tab=My_Projects"  role="button">Ricky's Projects</a></li>
+         <li role="presentation"><a class="btn " href="https://na34.salesforce.com/_ui/core/userprofile/UserProfilePage?u=00561000000nz6vAAA&tab=My_Projects"  role="button">Vance's Projects</a></li>
+	  </ul>
+      <!-- Single button -->
+
+
+    <div class="container">
+      <!-- Example row of columns -->
+        <apex:repeat value="{!projects}" var="r" >
+            <div class="row">
+                <div class=".col-md-4">
+                	<h3><apex:outputField value="{!r.Name}" />:  <apex:outputField value="{!r.Project_Status_Indicator__c}" /></h3>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="{!r.Percent_Complete__c}" aria-valuemin="0" aria-valuemax="100" style="width: {!r.Percent_Complete__c}%">
+                            <span class="sr-only">%</span><apex:outputField value="{!r.Percent_Complete__c}"/>%
+                        </div>
+                    </div>
+                </div>
+                <ul class="list-group">
+                	<li class="list-group-item">Account: <apex:outputField value="{!r.Account__c}" /></li>
+                    <li class="list-group-item">Stage:  
+                        <span class="badge"><apex:outputField value="{!r.Project_stage__c}" /></span>
+                    </li>
+                    <li class="list-group-item">Status Indicator:  
+                        <span class="badge"><apex:outputField value="{!r.Total_Open_Task_Count__c}" /></span>
+                    </li>
+					
+                    <li class="list-group-item">Total Complete Tasks:  
+                        <span class="badge"><apex:outputField value="{!r.Total_Complete_Task_Count__c}" /></span>
+                    </li>
+                </ul>
+                
+                <p style="clear:left;float:right;"><a class="btn btn-primary" href="/{!r.id}" target="_new" role="button">View Project &raquo;</a></p>        
+            </div>
+          </apex:repeat> 
+
+    </div> <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  </body>
+</html>
+
+</apex:page>
