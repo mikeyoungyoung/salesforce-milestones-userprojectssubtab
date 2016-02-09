@@ -1,0 +1,21 @@
+public class myProjectListCtrl {
+    public final List<Milestone1_Project__c> projects {get;set;}
+    public String currentFocusUserId {get;set;}
+
+    public myProjectListCtrl() {
+        
+        currentFocusUserId = ApexPages.currentPage().getParameters().get('sfdc.userId');
+		if(currentFocusUserId == null || currentFocusUserId == '')
+			currentFocusUserId = UserInfo.getUserId();
+		//setFocusUser();
+        
+        projects = [SELECT Id, Name, Account__c, Project_stage__c, Status__c, Percent_Complete__c, Total_Open_Task_Count__c, Total_Complete_Task_Count__c, Project_Status_Indicator__c 
+                   FROM Milestone1_Project__c
+                   WHERE Owner.Id = :currentFocusUserId AND Template__c != True]; //:ApexPages.currentPage().getParameters().get('sfdc.userId') AND Template__c != True];
+    }
+
+    public PageReference save() {
+        update projects;
+        return null;
+    }
+}
